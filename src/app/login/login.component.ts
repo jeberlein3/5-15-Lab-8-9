@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastService } from '../toast/toast.service';
-
+import { HttpService } from '../../shared-service/http.service';
 export interface IUser {
   id?: number;
   username: string;
@@ -16,13 +16,16 @@ export class LoginComponent implements OnInit {
   user: IUser = { username: null, password: null };
   constructor(
     private router: Router,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private http: HttpService
   ) {
   }
 
   ngOnInit() {
 
   }
-
+  login() {
+    console.log('from login component login()');
+  }
 
 }
