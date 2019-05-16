@@ -25,20 +25,31 @@ export class HttpService {
   // get('car')
   async get(path: string) {
     const resp = await this.http.get(this.apiURL + path, this.headers).toPromise();
+    console.log('resp from http service get() resp:', resp.json());
+    return resp.json();
 
-    console.log('resp from http service get() resp:', resp);
 
   } // post ('car', {make: Chevy, model:Colorado});
   async post(path: string, payload: any) {
     const resp = await this.http.post(this.apiURL + path, payload, this.headers).toPromise();
     console.log('from http service post() resp:', resp.json());
   }
-  put() {
+  // put ('car/id/1,{make: 'toyota', model: 'celica'});
+  async put(path: string, payload: any) {
+    const resp = await this.http.put(this.apiURL + path, payload, this.headers).toPromise();
+    console.log('from http service put()', resp.json());
+    return resp.json();
+
+
 
   }
-  delete() {
+  async delete(path: string) {
+    const resp = await this.http.delete(this.apiURL + path, this.headers).toPromise();
+    console.log('from http service delete()', resp.json();
+    return resp.json();
 
   }
+
   get headers() {
     const token = localStorage.getItem('id_token') || null;
 // tslint:disable-next-line: deprecation

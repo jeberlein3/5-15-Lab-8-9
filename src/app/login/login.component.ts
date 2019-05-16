@@ -4,7 +4,7 @@ import { ToastService } from '../toast/toast.service';
 import { HttpService } from '../../shared-service/http.service';
 export interface IUser {
   id?: number;
-  username: string;
+  email: string;
   password: string;
 }
 @Component({
@@ -13,7 +13,9 @@ export interface IUser {
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  user: IUser = { username: null, password: null };
+  user: IUser = { email: null, password: null };
+  currentUser = {};
+  loggedIn = false;
   constructor(
     private router: Router,
     private toastService: ToastService,
@@ -22,10 +24,33 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    const token = localStorage.getItem('id_token');
+    if (token != null) {
+      this.loggedIn = true;
+      this.router.navigate(['']);
+    } else {
+      this.loggedIn = false;
+    }
+
 
   }
-  login() {
-    console.log('from login component login()');
+  async login(user: IUser) {
+    console.log('from login componenet login()');
+    // const payload = {
+    //  email: 'jeberlein3@gmail.com',
+    // password: '@Hybrid15'
+    // };
+    console.log('from login user: ', user);
+    const resp: any = await this.http.post('user/login', user);
+    console.log('resp from login()', resp);
+    if (resp && resp.token) {
+      localStorage.setItem('id_token', resp.token);
+      this.toastService.showToast('success', 3000, 'Login Success');
+      this.router.navigate(['']);
+
+    } else {
+      this.toastService.showToast('danger', 3000, 'Login Failed');
+    }
   }
 
 }

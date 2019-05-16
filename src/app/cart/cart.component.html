@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary main-nav">
-  
+
 </nav>
 
 <ul class="nav justify-content-end nav-action-container">
@@ -11,7 +11,7 @@
   </li>
   <li class="nav-item">
     <button mat-raised-button color="primary">Add Bike Model 3</button>
-    </li>
+  </li>
   <li class="nav-item">
     <button mat-raised-button color="primary">Checkout</button>
   </li>
@@ -19,21 +19,21 @@
 
 <div class="contact-grid">
   <div class="gallery-grid">
-    <mat-card class="example-card" *ngFor="let bike of bikes; let i = index">
+    <mat-card class="example-card" *ngFor="let car of cars; let i = index">
       <mat-card-content>
         <img class="cover" alt="bike">
         <p>
           <label for="id">ID:</label>
-          <input disabled type="text" class="form-control" placeholder="ID" aria-label="ID">
-        </p>  
+          <input [(ngModel)]="car.id" disabled type="text" class="form-control" placeholder="ID" aria-label="ID">
+        </p>
         <p>
-          <label for="description">Description:</label>
-          <input type="text" class="form-control" placeholder="Description" aria-label="desc"
+          <label for="description">Make:</label>
+          <input [(ngModel)]="car.make" type="text" class="form-control" placeholder="Make" aria-label="desc"
             aria-describedby="basic-addon1">
         </p>
         <p>
-          <label for="price">Price</label>
-          <input type="text" class="form-control" placeholder="Price" aria-label="price"
+          <label for="price">Model</label>
+          <input [(ngModel)]="car.model" type="text" class="form-control" placeholder="Model" aria-label="price"
             aria-describedby="basic-addon1">
         </p>
         <p>
@@ -44,8 +44,8 @@
       </mat-card-content>
       <mat-card-actions>
         <div class="btn-group pull-right">
-          <button mat-raised-button color="primary" class="pull-right">Save For Later</button>
-          <button mat-raised-button color="warn" >Remove From Cart</button>
+          <button mat-raised-button color="primary" class="pull-right" (click)="updateCar(car)">Save For Later</button>
+          <button mat-raised-button color="warn" (click)="deleteCar(car, i)">Remove From Cart</button>
         </div>
       </mat-card-actions>
     </mat-card>
